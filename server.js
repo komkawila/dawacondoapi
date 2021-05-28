@@ -2,30 +2,25 @@ const express = require("express");
 const app = express();
 const mysql = require("mysql");
 var cors = require("cors");
-
 app.use(
   express.urlencoded({
     extended: true,
   })
 );
-
 app.use(cors());
 app.use(express.json());
-
 // const db = mysql.createConnection({
 //   host: "localhost",
 //   user: "root",
 //   password: "",
 //   database: "dawaconda",
 // });
-
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "vJPD6yy9HoiGWM",
     database: "dawacondo",
   });
-
 
 app.get("/state", (req, res) => {
   db.query("SELECT * FROM state WHERE id=1", function (err, result, fields) {
@@ -154,21 +149,8 @@ app.post("/insertnews", (req, res) => {
       }
     );
   }
-
-  //   db.query(
-  //     "INSERT INTO news_tb(user_id, news,room) VALUES (?,?,?)",
-  //     [user_id, news, room],
-  //     function (err, result, fields) {
-  //       if (err) {
-  //         console.log(err);
-  //         res.send(result);
-  //       } else {
-  //         res.send(result);
-  //         console.log(result);
-  //       }
-  //     }
-  //   );
 });
+
 app.delete("/deletenews/:id", (req, res) => {
   const id = req.params.id;
   db.query(
@@ -215,4 +197,3 @@ app.post("/insertusers", (req, res) => {
 });
 
 app.listen(3001, () => console.log("Server Started..."));
-
